@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tim 24 Jayapura | Pizza Place Sales</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/iconjayapura.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+    
+    <!-- cdn fontawesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar Start -->
+        <aside class="sidebar">
+            <div class="sidebar-logo text-center">
+              <img
+                src="./assets/images/Logo Team.png"
+                width="60px"
+                height="60px"
+                alt="logo"
+              />
+              <h1>Team 24 <span class="jayapura">Jayapura</span></h1>
+            </div>
+            <div class="sidebar-links">
+              <div class="link dashboard active" data-id="dashboard">
+                <i class="fa-solid fa-house"></i>
+                <p>Dashboard</p>
+              </div>
+              <div class="link about" data-id="about">
+                <i class="fa-solid fa-circle-info"></i>
+                <p>About</p>
+              </div>
+              <div class="link team" data-id="team">
+                <i class="fa-solid fa-user"></i>
+                <p>Team</p>
+              </div>
+            </div>
+          </aside>
+        <!-- Navbar end -->
+
+<!-- Dashboard -->
+    <main class="content">
+        <article class="title-page" id="dashboard">
+            <header>
+                <div class="header-title">
+                    <h1 class="title">Welcome Guys!</h1>
+                    <p>This is Jayapura24K Pizza Sales</p>
+                </div>
+                <div class="header-logo">
+                    <img src="./assets/images/Logo Team.png" alt="">
+                </div>
+
+            </header>
+        <section class="container">
+            <section class="breadcrumbs">
+                
+                <div class="filter-page">
+                    <select id="filter-time">
+                        <option value="">Alltime</option>
+                        <option value="Pagi">Pagi</option>
+                        <option value="Siang">Siang</option>
+                        <option value="Sore">Sore</option>
+                        <option value="Malam">Malam</option>
+                    </select>
+                </div>
+                <div class="filter-page">
+                    <select id="filter-bulan">
+                        <option value="">Allmonth</option>
+                        <option value="Januari">Januari</option>
+                        <option value="Februari">Februari</option>
+                        <option value="Maret">Maret</option>
+                        <option value="April">April</option>
+                        <option value="Mei">Mei</option>
+                        <option value="Juni">Juni</option>
+                        <option value="Juli">Juli</option>
+                        <option value="Agustus">Agustus</option>
+                        <option value="September">September</option>
+                        <option value="Oktober">Oktober</option>
+                        <option value="November">November</option>
+                        <option value="Desember">Desember</option>
+                    </select>
+                </div>
+                <div class="filter-page">
+                    <button id="btn-filter">Filter</button>
+                </div>
+            </section>
+
+            <section class="row">
+                <div class="regular">
+                  <h2>Quantity</h2>
+                  <h3 id="total-qty">0</h3>
+                </div>
+                <div class="regular" >
+                  <h2>Average</h2>
+                  <h3 id="average-qty">0</h3>
+                </div>
+                <div class="regular">
+                  <h2>Stakeholder</h2>
+                  <h3 id="stackholder">0</h3>
+                </div>
+              </section>
+              
+
+            <section class="row">
+                <div class="large">
+                    <h2>Total/Cluster Price</h2>
+                    <canvas id="clusterChart"></canvas>
+                </div>
+                <div class="large">
+                    <h2>Total/Category</h2>
+                    <canvas id="totalcategory"></canvas>
+                </div>
+                <div class="large">
+                    <h2>Total/Size</h2>
+                    <canvas id="totalSizes"></canvas>
+                </div>
+                <div class="large">
+                    <h2>Top 10</h2>
+                    <canvas id="top10pizza"></canvas>
+                </div>
+                <div class="large">
+                    <h2>Low 10</h2>
+                    <canvas id="low10pizza"></canvas>
+                </div>
+                <div class="large">
+                    <h2>Penjualan/Bulan</h2>
+                    <canvas id="penjualanperbulan"></canvas>
+                </div>
+            </section>
+
+            <table id="order-list" class="display responsive bordered" style="width:90%" font-size="20px">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date Order</th>
+                        <th>Pizza Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
+        </article>
+        <!-- Dashboard end -->
+
+        <!-- About  -->
+          <article id="about">
+          <header class="about-header">
+            <h1 class="title">Tentang Capstone Project</h1>
+            <p class="subtitle">
+                Capstone project adalah tugas proyek yang harus dikerjakan selama mengikuti program MSIB di RevoU Tech Academy. Capstone Project memuat <br>program Data Analytics dan Software Engineering dimana setiap tim akan diberikan sebuah dataset sebagai study case yang harus dikerjakan <br>untuk diimplementasikan ke dalam Data Analytics dan Software Engineering.
+                <br><br>
+                Tim 24 Jayapura mendapatkan dataset Pizza Sales yang kemudian perusahaannya diberi nama The 24K Pizza. Penamaan perusahaan ini <br>diharapkan dapat mewakili nama tim 24 yang berharga bagai angka kerat emas dengan kemurnian tertinggi. Pewarnaan website dibuat gelap <br>sedemikian rupa diambil dari referensi warna website-website profesional dengan harapan kedepannya <br>website kami dapat menyerupai kualitas website tersebut.
+            </p><br> <br> 
+            <h1 class="title">Latar Belakang Perusahaan The 24K Pizza</h1>
+            <p class="subtitle">
+                Penjualan pizza dikatakan stabil karena tidak adanya data yang mengalami fluktuasi secara signifikan. Perusahaan perlu <br>mengimplementasikan strategi yang dapat meningkatkan penjualan. Sehingga, diperlukan rekomendasi peluang yang paling optimal <br>untuk dapat meningkatkan penjualan setidaknya 10% dalam waktu 1 bulan. 
+                <br><br>
+                Dengan website yang disediakan dari tim 24 Jayapura, diharapkan situasi dan insight untuk memecahkan permasalahan <br>bisnis tersebut dapat tervisualisasikan dengan baik untuk perusahaan The 24K Pizza.
+            </p>
+            
+          </header>
+        </article>
+
+        <!-- Profil Tim -->
+        <article class="profil" id="team">
+            <header class="team-header">
+                <h1 class="title">Meet Our Team</h1>
+                <p class="subtitle">
+                  Our Expert team is made up of creatives with technical know-how,
+                  <br />
+                  strategists who think outside the box, and developers who push
+                  innovation.
+                </p>
+              </header>
+        <div class="profil">
+            <div class="slide-container swiper">
+                <div class="slide-content">
+                    <div class="card-wrapper swiper-wrapper">
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\ayunda.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Ayunda Wardhatul Fitrah</h2>
+                                <p class="description">Hidup adalah perjalanan, bukan <br>tujuan. karena kesuksesan sesungguhnya adalah menikmati prosesnya</p>
+    
+                                <a href="https://www.instagram.com/ayunda_wf/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\nafisa.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Nafisa Alfi Sa'Diya</h2>
+                                <p class="description">Hidup tidak dapat diprediksi, <br>tetapi anda dapat memilih takdir Anda sendiri</p>
+    
+                                <a href="https://www.instagram.com/nfsalf_/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\fredian.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Fredian Septa Nugroho</h2>
+                                <p class="description">Tuhan akan memberikan senyuman dibalik kesedihan, dan akan memberikan harapan dibalik keputusasaan</p>
+    
+                                <a href="https://www.instagram.com/fredyan_s.n/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\naswa.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Andi Naswa Aprilia</h2>
+                                <p class="description">Kita bisa karna terbiasa,<br> jangan pernah menyerah untuk melakukan hal yang indah</p>
+    
+                                <a href="https://www.instagram.com/andinaswa/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\azim.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">M. Abdul Azmi</h2>
+                                <p class="description">Singkat saja, <br>semua akan berlalu</p><br>
+    
+                                <a href="https://www.instagram.com/m._zim/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\nabila.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Nabila Aliefa Zahra</h2>
+                                <p class="description">Hidup itu pilihan, <br>jadi nikmati dan jalanin aja dah</p><br>
+    
+                                <a href="https://www.instagram.com/nabila_zhralf/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\rima.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Rima Rahmawati</h2>
+                                <p class="description">Pisau tumpul jika rajin diasah <br>akan tajam juga</p><br>
+    
+                                <a href="https://www.instagram.com/rimaarh28_/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\atia.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Atia Syahbani</h2>
+                                <p class="description">Born to be a Master, <br>Forced to be a Fighter— <br>and still walk to be a Winner.</p>
+    
+                                <a href="https://www.instagram.com/atiaasybnx/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\huznul.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Husznul Virbiansyah</h2>
+                                <p class="description">Kesulitan tidak akan mungkin mengalahkan kemudahan dua kali</p><br>
+    
+                                <a href="https://www.instagram.com/virbiansyah5/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        <div class="card swiper-slide">
+                            <div class="image-content">
+                                <span class="overlay"></span>
+    
+                                <div class="card-image">
+                                    <img src="assets\images\vany.png" alt="" class="card-img">
+                                </div>
+                            </div>
+    
+                            <div class="card-content">
+                                <h2 class="name">Vany Aulia Putri</h2>
+                                <p class="description">Tetap jalani dengan semangat <br> meski lebih enakan tidur</p><br>
+    
+                                <a href="https://www.instagram.com/vnyqqx__/"><button class="button">View More</button></a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </article>
+    </main>
+</div>
+    
+    <!-- Footer Start -->
+    <footer class="footer">
+        <div class="footer-container">
+         <div class="footer-section">
+            <h4>Capstone Link</h4>
+            <ul>
+                <li><a target="_blank" href="https://docs.google.com/spreadsheets/d/1fDAaINYGeRf2vwyn2FdJSqgbPiiVZmkF/edit?usp=sharing&ouid=117372351754311651407&rtpof=true&sd=true">Dataset</a></li>
+                <li><a target="_blank" href="https://lookerstudio.google.com/reporting/206fbfbc-fde5-4e4c-a1be-17aec4734c09/page/6hFvD/edit">Looker Studio</a></li>
+                <li><a target="_blank" href="https://www.canva.com/design/DAGCxsWGn0g/WlB2L6xoD4cgY934K2hWTw/edit?utm_content=DAGCxsWGn0g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton">Picth Deck</a></li>
+                <li><a target="_blank" href="https://classroom.github.com/a/Be2xh6sm">GitHub</a></li>
+            </ul>
+         </div>
+         <div class="footer-section">
+         <h4>Support By</h4>
+         <ul class="footer-logo">
+            <li><a target="_blank" href="https://revou.co/"> <img src="assets\images\revou.png" alt="RevoU" width="100px" height="50px"></a></li>
+            <li><a target="_blank" href="https://www.kemdikbud.go.id/"> <img src="assets\images\kemendikbud.png" alt="Kemendikbud" width="100px" height="50px"></a></li>
+            <li><a target="_blank" href="https://kampusmerdeka.kemdikbud.go.id/program/studi/syarat-ketentuan"> <img src="assets\images\merdeka.png" alt="kampusmerdeka" width="100px" height="50px"></a></li>
+         </ul>
+        </div>
+        <div class="credit">
+            <p>Created by <a href="">JayaPura24Team</a>. | &copy; 2024.</p>
+            <p><a href="mailto:team24.jayapura@gmail.com">team24.jayapura@gmail.com</a></p>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- ChartJs start -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="js/swiper-bundle.min.js"></script>
+
+    <!-- Script -->
+    <script src="js/main.js"></script>
+
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
+
+
+</body>
+</html>
